@@ -13,7 +13,7 @@ metadata:
     workflows - and, in the management account, the IAM Identity Center
     permission sets and groups.
   annotations:
-    github.com/project-slug: jnet-platform-factory/aws-account-bootstrap
+    github.com/project-slug: JNet-Platform-Foundry/aws-account-bootstrap
     jira/project-key: JNET
   tags: [bash, iam, oidc, identity-center]
   links:
