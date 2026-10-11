@@ -944,8 +944,8 @@ CloudFormation, and `app-cfn-exec-role` creates the resources.
 
 | Service                                                                                             | What it does                                                                                                                 | Capabilities                                    |
 | --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| [events-observability](https://github.com/jnet-platform-factory/events-observability)               | Indexes every event on an EventBridge bus into OpenSearch, with an error-alert digest, dead-letter queues and alarms         | `CAPABILITY_NAMED_IAM` `CAPABILITY_AUTO_EXPAND` |
-| [aws-daily-monitoring-report](https://github.com/jnet-platform-factory/aws-daily-monitoring-report) | Emails the account's health every day — alarms, cost, Lambda, EventBridge, RDS — and optionally writes a JSON snapshot to S3 | `CAPABILITY_IAM`                                |
+| [events-observability](https://github.com/JNet-Platform-Foundry/aws-eventbridge-firehose-opensearch-forwarder)               | Indexes every event on an EventBridge bus into OpenSearch, with an error-alert digest, dead-letter queues and alarms         | `CAPABILITY_NAMED_IAM` `CAPABILITY_AUTO_EXPAND` |
+| [aws-daily-monitoring-report](https://github.com/JNet-Platform-Foundry/aws-daily-monitoring-report) | Emails the account's health every day — alarms, cost, Lambda, EventBridge, RDS — and optionally writes a JSON snapshot to S3 | `CAPABILITY_IAM`                                |
 
 Each service's README is the reference for its parameters. This section covers how to
 deploy them through the bootstrap's roles, and what to check before trusting them.
@@ -1010,14 +1010,14 @@ platform repos deploy the events forwarder.
 
 Every event on a bus, indexed into an OpenSearch domain or Serverless collection
 **that you own** — the stack does not create one. Its README's
-[onboarding section](https://github.com/jnet-platform-factory/events-observability#onboarding-a-new-deployment)
+[onboarding section](https://github.com/JNet-Platform-Foundry/aws-eventbridge-firehose-opensearch-forwarder#onboarding-a-new-deployment)
 is the long version. The order below matters because of the grant.
 
 1. **Deploy with `CreateForwardingRule=false`.** The stack creates its role, but
    nothing that writes to the domain yet:
 
    ```bash
-   git clone https://github.com/jnet-platform-factory/events-observability
+   git clone https://github.com/JNet-Platform-Foundry/aws-eventbridge-firehose-opensearch-forwarder
    cd events-observability
    sam build --use-container
    sam deploy --stack-name events-observability-dev --resolve-s3 \
@@ -1075,7 +1075,7 @@ runs in. Two things must be in place first:
   and its cost section says Cost Explorer is unavailable.
 
 ```bash
-git clone https://github.com/jnet-platform-factory/aws-daily-monitoring-report
+git clone https://github.com/JNet-Platform-Foundry/aws-daily-monitoring-report
 cd aws-daily-monitoring-report
 sam build
 sam deploy --stack-name aws-daily-monitoring-report --resolve-s3 \
